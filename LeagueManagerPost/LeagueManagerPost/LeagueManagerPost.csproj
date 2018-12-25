@@ -185,6 +185,10 @@
     <Compile Include="Migrations\201812251819021_First.Designer.cs">
       <DependentUpon>201812251819021_First.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201812251852041_AddedRestOfProperties.cs" />
+    <Compile Include="Migrations\201812251852041_AddedRestOfProperties.Designer.cs">
+      <DependentUpon>201812251852041_AddedRestOfProperties.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Game.cs" />
@@ -279,6 +283,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201812251819021_First.resx">
       <DependentUpon>201812251819021_First.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812251852041_AddedRestOfProperties.resx">
+      <DependentUpon>201812251852041_AddedRestOfProperties.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
