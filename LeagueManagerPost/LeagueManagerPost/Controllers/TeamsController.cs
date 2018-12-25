@@ -46,7 +46,7 @@ namespace LeagueManagerPost.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name")] Team team)
+        public ActionResult Create([Bind(Include = "Id,Coach,Name,Wins,Losses")] Team team)
         {
             if (ModelState.IsValid)
             {
@@ -78,7 +78,7 @@ namespace LeagueManagerPost.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name")] Team team)
+        public ActionResult Edit([Bind(Include = "Id,Coach,Name,Wins,Losses")] Team team)
         {
             if (ModelState.IsValid)
             {

@@ -1,0 +1,55 @@
+﻿@model IEnumerable<LeagueManagerPost.Models.Game>
+@{
+    ViewBag.Title = "Upcoming Games";
+}
+
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+<script>
+    $(document).ready(function () {
+
+    ///////////////////////////////////////////
+    // Displays the number of upcoming games //
+    //                                       //
+        var up = $(".upcoming");             //
+        var g = $(".info").length;           //
+                                             //
+        up.append(" (" + g + ")");           //
+    ///////////////////////////////////////////
+    });
+</script>
+
+<div class="row">
+    <div class="col-md-12">
+        <h2 class="upcoming">Upcoming Games</h2>
+        <p>
+            <ul class="games">
+                @foreach (var Game in Model.OrderBy(g => g.Date))
+                {
+                    <li class="info">
+                        <div class="date">
+                            <div class="month">
+                                @Game.Date.ToString("MMM")
+                            </div>
+                            <div class="day">
+                                @Game.Date.ToString("d ")
+                            </div>
+                        </div>
+                        <div class="details">
+                            <span class="awayteam">
+                                @Game.AwayTeam.Name (@Game.AwayTeam.Wins-@Game.AwayTeam.Losses)
+                            </span>
+                            <span class="hometeam">
+                                <strong>@("@ ")</strong>  @Game.HomeTeam.Name (@Game.HomeTeam.Wins-@Game.HomeTeam.Losses)
+                            </span>
+                            <div class="court">
+                                @Game.Location
+                            </div>
+                        </div>
+                    </li>
+
+                }
+            </ul>
+        </p>
+    </div>
+
+</div>

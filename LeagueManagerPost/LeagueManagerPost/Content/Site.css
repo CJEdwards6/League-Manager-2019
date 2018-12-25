@@ -22,3 +22,301 @@ select,
 textarea {
     max-width: 280px;
 }
+
+
+/* Bootstrap Overrides */
+
+body {
+    font-family: "Mukta Mahee";
+    font-size: 18px;
+    background-color: #fff;
+    color: #333;
+}
+
+.body {
+    font-family: "Mukta Mahee";
+    font-size: 18px;
+    background-color: #fff;
+    color: #333;
+}
+
+.body-content {
+    padding-top: 20px;
+}
+
+.jumbotron {
+    position: relative;
+    margin-top: 25px;
+}
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: "Oswald", Helvetica, Arial, sans-serif;
+    margin-bottom: 10px;
+}
+
+.navbar-inverse {
+    background-color: #e66b14;
+    border-color: #e66b14;
+    font-family: "Oswald", Helvetica, Arial, sans-serif;
+}
+
+    .navbar-inverse .navbar-nav > li > a {
+        color: #fff;
+        /*border-right: 1px solid #fff;*/
+    }
+
+        .navbar-inverse .navbar-nav > li > a:hover {
+            background-color: #337ab7;
+            /*border-right: 1px solid #fff;*/
+            -o-transition-duration: 0.6s;
+            -moz-transition-duration: 0.6s;
+            -webkit-transition-duration: 0.6s; /* Safari */
+            transition-duration: 0.6s;
+        }
+
+    .navbar-inverse .navbar-nav > li:first-child {
+        color: #fff;
+        border-left: 1px solid #fff;
+    }
+
+    .navbar-inverse .navbar-nav > li {
+        color: #fff;
+        border-right: 1px solid #fff;
+    }
+
+    .navbar-inverse .navbar-brand {
+        color: #fff;
+    }
+
+.dropdown-divider {
+    padding: 10px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-control, #SearchString {
+    font-size: 14px;
+    /*padding: 17px 12px;*/
+    border-radius: 10px 0;
+}
+
+.btn {
+    padding: 7px 12px;
+    font-size: 17px;
+    border-radius: 10px 0;
+}
+
+.form-control:focus {
+    border-color: #ff6a00;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.dropdown-menu {
+    text-align: center;
+    font-size: 18px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+/*#last.dropdown-item {
+    padding-bottom: 20px;
+}*/
+
+.navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
+    color: #fff;
+    background-color: #e66b14;
+}
+
+.navbar-fixed-top {
+    top: 0;
+    border-width: 0 0 0;
+}
+
+.navbar-brand {
+    font-weight: 700;
+    font-size: 22px;
+}
+
+#mode {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    border: none;
+}
+
+div > h2, h4 {
+    color: #337ab7;
+}
+
+    h4 > strong {
+        color: #ea1a1a;
+    }
+
+.mode {
+    color: #fff;
+    background-color: #333;
+}
+
+/* Dark Mode */
+
+.bodyDark {
+    font-family: "Mukta Mahee";
+    font-size: 18px;
+    background-color: #333;
+    color: #fff;
+}
+
+.footerDark {
+    color: #fff;
+}
+
+.modeDark {
+    color: #333;
+    background-color: #fff;
+}
+
+.divDark {
+    color: #333;
+}
+
+/*.control-label-dark {
+    color: #fff;
+}*/
+
+/*.basketball-icon {
+    float:left;
+    padding: 15px;
+}*/
+
+/* Page-Level Styles */
+
+.information {
+    text-align: center;
+}
+
+.games {
+    /*background-color: #eee;*/
+    list-style: none;
+    padding-top: 20px;
+}
+
+    .games > li {
+        position: relative;
+        margin-bottom: 30px;
+        background-color: #eee;
+        border-radius: 15px 0;
+        max-width: 50%;
+    }
+
+        .games > li .date {
+            background-color: #e66b14;
+            color: white;
+            text-align: center;
+            width: 60px;
+            border-radius: 10px 0;
+        }
+
+        .games > li > div .month {
+            text-transform: uppercase;
+            color: #fff;
+            font-size: 18px;
+            font-weight: 700;
+            padding-top: 1px;
+            font-family: "Oswald", Helvetica, Arial, sans-serif;
+        }
+
+        .games > li > div .day {
+            background-color: white;
+            color: #333;
+            font-size: 24px;
+            padding: 2px;
+        }
+
+        .games > li .details {
+            position: absolute;
+            top: 9px;
+            left: 70px;
+        }
+
+            .games > li .details .awayteam {
+                font-weight: 700;
+            }
+
+            .games > li .details .hometeam {
+                font-weight: 700;
+            }
+
+            .games > li .details .court {
+                font-size: 15px;
+            }
+
+#basketball {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    top: 22px;
+    left: 10px;
+    opacity: 0.2;
+}
+
+.Error, .jumbo2 {
+    text-align: center;
+}
+
+#SearchString {
+    font-size: 14px;
+    border-radius: 10px 0;
+    width: 100%;
+    height: 40px;
+    padding: 6px 12px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+
+/* Calendar Page */
+
+.modal-content {
+    padding: 20px;
+}
+
+.btn-success {
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #337ab7;
+}
+
+.fc-scroller, .fc-day-grid-container {
+    overflow: visible;
+    height: 440px;
+}
+
+.fc-row, .fc-widget-header {
+    border-right-width: 0;
+    margin-right: 0;
+}
+
+#pDetails > p {
+    margin-bottom: 15px;
+}
+
+#calender {
+    font-size: 15px;
+}
+
+.btn-success:hover {
+    color: #fff;
+    background-color: #e66b14;
+    border-color: #e66b14;
+}
