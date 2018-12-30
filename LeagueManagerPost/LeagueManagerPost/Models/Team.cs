@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace LeagueManagerPost.Models
 {
@@ -16,10 +17,12 @@ namespace LeagueManagerPost.Models
         [StringLength(30, ErrorMessage = "The coach name must be between 5 and 30 characters",
             MinimumLength = 5)]
         public string Coach { get; set; }
+
         public int Wins { get; set; }
 
         public int Losses { get; set; }
 
+        public List<Player> Players { get; set; }
 
         [Display(Name = "Win %")]
         public float WinPercentage

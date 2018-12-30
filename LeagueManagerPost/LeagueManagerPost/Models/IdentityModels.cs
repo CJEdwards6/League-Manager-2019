@@ -23,6 +23,7 @@ namespace LeagueManagerPost.Models
         public DbSet<Game> Games { get; set; }
         public DbSet<Team> Teams { get; set; }
         public DbSet<Events> Events { get; set; }
+        public DbSet<Player> Players { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)

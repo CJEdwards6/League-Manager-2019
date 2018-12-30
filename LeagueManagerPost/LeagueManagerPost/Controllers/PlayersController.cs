@@ -10,109 +10,109 @@ using LeagueManagerPost.Models;
 
 namespace LeagueManagerPost.Controllers
 {
-    public class TeamsController : Controller
+    public class PlayersController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-        private readonly Repo _repo = new Repo();
 
-        // GET: Teams
+        // GET: Players
         public ActionResult Index()
         {
-            return View(db.Teams.ToList());
+            return View(db.Players.ToList());
         }
 
-        // GET: Teams/Details/5
+        // GET: Players/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Team team = db.Teams.Find(id);
-            //var team = _repo.GetTeamWithPlayers(id.Value);
-            if (team == null)
+            Player player = db.Players.Find(id);
+            if (player == null)
             {
                 return HttpNotFound();
             }
-            return View(team);
+            return View(player);
         }
 
-        // GET: Teams/Create
-        public ActionResult Create()
+        // GET: Players/Create
+        public ActionResult Create(int teamId, string teamName)
         {
+            ViewBag.TeamId = teamId;
+            ViewBag.TeamName = teamName;
             return View();
         }
 
-        // POST: Teams/Create
+        // POST: Players/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Coach,Name,Wins,Losses")] Team team)
+        public ActionResult Create([Bind(Include = "Id,Name,Position,Number,Starter")] Player player)
         {
             if (ModelState.IsValid)
             {
-                db.Teams.Add(team);
+                db.Players.Add(player);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(team);
+            return View();
         }
 
-        // GET: Teams/Edit/5
+        // GET: Players/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Team team = db.Teams.Find(id);
-            if (team == null)
+            Player player = db.Players.Find(id);
+            if (player == null)
             {
                 return HttpNotFound();
             }
-            return View(team);
+            return View(player);
         }
 
-        // POST: Teams/Edit/5
+        // POST: Players/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Coach,Name,Wins,Losses")] Team team)
+        public ActionResult Edit([Bind(Include = "Id,Name,Position,Number,Starter")] Player player)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(team).State = EntityState.Modified;
+                db.Entry(player).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(team);
+            return View(player);
         }
 
-        // GET: Teams/Delete/5
+        // GET: Players/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Team team = db.Teams.Find(id);
-            if (team == null)
+            Player player = db.Players.Find(id);
+            if (player == null)
             {
                 return HttpNotFound();
             }
-            return View(team);
+            return View(player);
         }
 
-        // POST: Teams/Delete/5
+        // POST: Players/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Team team = db.Teams.Find(id);
-            db.Teams.Remove(team);
+            Player player = db.Players.Find(id);
+            db.Players.Remove(player);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

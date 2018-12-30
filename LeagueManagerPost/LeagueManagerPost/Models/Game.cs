@@ -23,7 +23,6 @@ namespace LeagueManagerPost.Models
             MinimumLength = 5)]
         public string Location { get; set; }
 
-
         [Required]
         [Display(Name = "Home Team")]
         public Team HomeTeam { get; set; }
