@@ -16,9 +16,44 @@ namespace LeagueManagerPost.Controllers
         private readonly Repository _repo = new Repository();
 
         // GET: Teams
-        public ActionResult Index()
+        //public ActionResult Index()
+        //{
+        //    return View(db.Teams.ToList());
+        //}
+
+        public ViewResult Index(string sortOrder, string searchString)
         {
-            return View(db.Teams.ToList());
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_" : "";
+            ViewBag.CoachSortParm = String.IsNullOrEmpty(sortOrder) ? "coach_" : "";
+            ViewBag.WinsSortParm = String.IsNullOrEmpty(sortOrder) ? "wins_" : "";
+            ViewBag.LossesSortParm = String.IsNullOrEmpty(sortOrder) ? "losses_" : "";
+
+            var teams = from s in db.Teams
+                        select s;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                teams = teams.Where(s => s.Name.Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+                case "name_":
+                    teams = teams.OrderBy(s => s.Name);
+                    break;
+                case "coach_":
+                    teams = teams.OrderBy(s => s.Coach);
+                    break;
+                case "wins_":
+                    teams = teams.OrderByDescending(s => s.Wins);
+                    break;
+                case "losses_":
+                    teams = teams.OrderByDescending(s => s.Losses);
+                    break;
+                default:
+                    teams = teams.OrderByDescending(s => s.Wins);
+                    break;
+            }
+
+            return View(teams.ToList());
         }
 
         // GET: Teams/Details/5

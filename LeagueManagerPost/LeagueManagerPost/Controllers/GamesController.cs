@@ -15,9 +15,49 @@ namespace LeagueManagerPost.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Games
-        public ActionResult Index()
+        //public ActionResult Index()
+        //{
+        //    var games = db.Games.Include(g => g.AwayTeam).Include(g => g.HomeTeam);
+        //    return View(games.ToList());
+        //}
+
+        public ViewResult Index(int? id, string sortOrder, string searchString)
         {
-            var games = db.Games.Include(g => g.AwayTeam).Include(g => g.HomeTeam);
+            ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
+            ViewBag.TimeSortParm = sortOrder == "Time" ? "time_desc" : "Time";
+            ViewBag.LocationSortParm = String.IsNullOrEmpty(sortOrder) ? "location_" : "";
+            ViewBag.HomeTeamSortParm = String.IsNullOrEmpty(sortOrder) ? "homeTeam_" : "";
+            ViewBag.AwayTeamSortParm = String.IsNullOrEmpty(sortOrder) ? "awayTeam_" : "";
+
+            var games = from s in db.Games.Include(s => s.HomeTeam).Include(s => s.AwayTeam)
+                        select s;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                games = games.Where(s => s.HomeTeam.Name.Contains(searchString)
+                                       || s.AwayTeam.Name.Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+                case "Date":
+                    games = games.OrderBy(s => s.Date);
+                    break;
+                case "Time":
+                    games = games.OrderBy(s => s.Time);
+                    break;
+                case "location_":
+                    games = games.OrderBy(s => s.Location);
+                    break;
+                case "homeTeam_":
+                    games = games.OrderBy(s => s.HomeTeam.Name);
+                    break;
+                case "awayTeam_":
+                    games = games.OrderBy(s => s.AwayTeam.Name);
+                    break;
+                default:
+                    games = games.OrderBy(s => s.Date);
+                    break;
+            }
+
             return View(games.ToList());
         }
 

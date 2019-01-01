@@ -9,43 +9,64 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+@using (Html.BeginForm())
+{
+    <p>
+        Find by name: @Html.TextBox("SearchString")
+        <input class="btn btn-primary" type="submit" value="Search" />
+    </p>
+}
+
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Coach)
+            @Html.ActionLink("Name", "Index", new { sortOrder = ViewBag.NameSortParm })
+        </th>
+        @*<th>
+            @Html.ActionLink("Coach", "Index", new { sortOrder = ViewBag.CoachSortParm })
+        </th>*@
+        <th>
+            @Html.ActionLink("Wins", "Index", new { sortOrder = ViewBag.WinsSortParm })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.ActionLink("Losses", "Index", new { sortOrder = ViewBag.LossesSortParm })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Wins)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Losses)
+            @Html.ActionLink("Win %", "Index", new { sortOrder = ViewBag.WinPercentageSortParm })
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Coach)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Wins)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Losses)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.Coach)
+            </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.Wins)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Losses)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WinPercentage)
+            </td>
+            <td>
+                
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                
+
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+
+                
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                
+            </td>
+        </tr>
+    }
 
 </table>
