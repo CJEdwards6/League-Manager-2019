@@ -14,6 +14,9 @@ namespace LeagueManagerPost.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        
+        private readonly Repository _repo = new Repository();
+
         // GET: Players
         public ActionResult Index()
         {
@@ -35,60 +38,74 @@ namespace LeagueManagerPost.Controllers
             return View(player);
         }
 
-        // GET: Players/Create
+        // Added new Create method that takes in team info
         public ActionResult Create(int teamId, string teamName)
         {
             ViewBag.TeamId = teamId;
             ViewBag.TeamName = teamName;
             return View();
         }
-
-        // POST: Players/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+       
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Position,Number,Starter")] Player player)
+        public ActionResult Create([Bind(Include = "Id,Name,Position,Number,Starter,TeamId")] Player player)
         {
-            if (ModelState.IsValid)
+            if (!int.TryParse(Request.Form["TeamId"], out int teamId))
             {
-                db.Players.Add(player);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            _repo.SaveNewPlayer(player, teamId);
 
-            return View();
+            return RedirectToAction("Edit", "Teams", new { id = teamId });
+            //return RedirectToAction("Index", "Teams");
         }
+        ////////////////////////////////////////////////////////////
+
 
         // GET: Players/Edit/5
-        public ActionResult Edit(int? id)
+        //public ActionResult Edit(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    Player player = db.Players.Find(id);
+        //    if (player == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(player);
+        //}
+
+        public ActionResult Edit(int? id, int teamId, string name)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Player player = db.Players.Find(id);
-            if (player == null)
+            ViewBag.TeamId = teamId;
+            ViewBag.TeamName = name;
+            var players = _repo.GetPlayersById(id.Value);
+            if (players == null)
             {
                 return HttpNotFound();
             }
-            return View(player);
+            return View(players);
         }
 
         // POST: Players/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Name,Position,Number,Starter")] Player player)
         {
-            if (ModelState.IsValid)
+            if (!int.TryParse(Request.Form["TeamId"], out int teamId))
             {
-                db.Entry(player).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            return View(player);
+            _repo.SaveUpdatedPlayer(player, teamId);
+            return RedirectToAction("Edit", "Teams", new { id = teamId });
         }
 
         // GET: Players/Delete/5
@@ -114,7 +131,7 @@ namespace LeagueManagerPost.Controllers
             Player player = db.Players.Find(id);
             db.Players.Remove(player);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Teams");
         }
 
         protected override void Dispose(bool disposing)

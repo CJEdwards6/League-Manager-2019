@@ -5,6 +5,11 @@ namespace LeagueManagerPost.Models
 {
     public class Team
     {
+        public Team()
+        {
+            Players = new List<Player>();
+        }
+
         public int Id { get; set; }
 
         [Required]

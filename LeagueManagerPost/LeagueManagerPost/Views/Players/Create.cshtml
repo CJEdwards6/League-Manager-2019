@@ -11,7 +11,8 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Player</h4>
+        <h4>New @ViewBag.TeamName Player</h4>
+        @Html.Hidden("TeamId", (object)ViewBag.TeamId)
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">

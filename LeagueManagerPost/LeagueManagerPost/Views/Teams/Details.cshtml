@@ -43,29 +43,32 @@
         </dd>
 
     </dl>
-    <table width="300" class="table table-bordered">
-        <thead>
-            <tr>
-                <th>Players</th>
-                <th>@Html.ActionLink("New Player", "Create", "Players", new { teamId = Model.Id, teamname = Model.Name }, null)</th>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <th>Number</th>
-                <th></th>
-            </tr>
-        </thead>
+    
+    <hr />
+</div>
+<div>
+    <h4>Players</h4>
+    <table width="300" class="table">
+
+        <tr>
+            <th>Number</th>
+            <th>Name</th>
+            <th>Position</th>
+            <th>Starter</th>
+        </tr>
+
         @foreach (var item in Model.Players)
         {
 
             <tr>
-                <td width="100"> @item.Name</td>
-                <td width="100">@item.Number </td>
+                <td> @item.Number</td>
+                <td> @item.Name </td>
+                <td> @item.Position</td>
+                <td> @item.Starter </td>
             </tr>
 
         }
     </table>
-    <hr />
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |

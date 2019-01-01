@@ -13,7 +13,7 @@ namespace LeagueManagerPost.Controllers
     public class TeamsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-        private readonly Repo _repo = new Repo();
+        private readonly Repository _repo = new Repository();
 
         // GET: Teams
         public ActionResult Index()
@@ -28,8 +28,8 @@ namespace LeagueManagerPost.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Team team = db.Teams.Find(id);
-            //var team = _repo.GetTeamWithPlayers(id.Value);
+            //Team team = db.Teams.Find(id);
+            var team = _repo.GetTeamWithPlayers(id.Value);
             if (team == null)
             {
                 return HttpNotFound();
@@ -48,7 +48,7 @@ namespace LeagueManagerPost.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Coach,Name,Wins,Losses")] Team team)
+        public ActionResult Create([Bind(Include = "Id,Name,Coach,Wins,Losses")] Team team)
         {
             if (ModelState.IsValid)
             {
@@ -67,7 +67,8 @@ namespace LeagueManagerPost.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Team team = db.Teams.Find(id);
+            //Team team = db.Teams.Find(id);
+            var team = _repo.GetTeamWithPlayers(id.Value);
             if (team == null)
             {
                 return HttpNotFound();
@@ -80,7 +81,7 @@ namespace LeagueManagerPost.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Coach,Name,Wins,Losses")] Team team)
+        public ActionResult Edit([Bind(Include = "Id,Name,Coach,Wins,Losses")] Team team)
         {
             if (ModelState.IsValid)
             {

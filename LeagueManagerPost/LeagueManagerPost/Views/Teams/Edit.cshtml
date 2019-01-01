@@ -1,6 +1,8 @@
 ﻿@model LeagueManagerPost.Models.Team
 
 @{
+    /**/
+
     ViewBag.Title = "Edit";
 }
 
@@ -10,7 +12,7 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Team</h4>
         <hr />
@@ -54,6 +56,41 @@
                 <input type="submit" value="Save" class="btn btn-default" />
             </div>
         </div>
+    </div>
+
+    
+    <div>
+        <h4>Players</h4>
+        <hr />
+        <div>
+        @Html.ActionLink("New Player", "Create", "Players", new { teamId = Model.Id, teamname = Model.Name }, null)
+    </div>
+        <table class="table">
+
+            <tr>
+                <th>Number</th>
+                <th>Name</th>
+                <th>Position</th>
+                <th>Starter</th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model.Players)
+            {
+
+                <tr>
+                    <td width="100"> @item.Number</td>
+                    <td>@item.Name </td>
+                    <td> @item.Position</td>
+                    <td>@item.Starter </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", "Players", new { id = item.Id, teamId = Model.Id }, null) |
+                        @Html.ActionLink("Delete", "Delete", "Players", new { id = item.Id, teamId = Model.Id }, null)
+                    </td>
+                </tr>
+
+            }
+        </table>
     </div>
 }
 
